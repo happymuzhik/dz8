@@ -25,13 +25,6 @@ let input = document.getElementById('cities_input');
 let timer = false
 let city_template = Handlebars.compile(document.getElementById('city_template').innerHTML);
 
-let draw_el = function(name){
-	let el = city_template({name:name});
-	let buf = document.createElement('div');
-	buf.innerHTML = el;
-	return buf.firstElementChild;
-};
-
 let draw_res = function(arr){
 	container = document.getElementById('res_cont');
 	container.innerHTML = '';
@@ -40,9 +33,7 @@ let draw_res = function(arr){
 		if (a.name < b.name) {return -1;}
 		return 0;
 	});
-	for (let i = 0; i < arr.length; i++){		
-		container.appendChild(draw_el(arr[i].name));
-	};
+	container.innerHTML = city_template({cities:arr});
 };
 
 let debounce = function(time){
